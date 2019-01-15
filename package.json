@@ -1,0 +1,23 @@
+{
+  "name": "listenbot",
+  "version": "1.0.0",
+  "description": "A bot that listen for \"Go\" then send measuremetns to a DB",
+  "main": "ListenBot.js",
+  "scripts": {
+    "test": "echo 'no tests'"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NeilSwartz/listenBot.git"
+  },
+  "author": "Neil Swartz",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/NeilSwartz/listenBot/issues"
+  },
+  "homepage": "https://github.com/NeilSwartz/listenBot#readme",
+  "dependencies": {
+    "amqplib": "^0.5.3",
+    "mongodb": "^3.1.10"
+  }
+}
