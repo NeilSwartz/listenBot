@@ -4,7 +4,8 @@
   "description": "A bot that listen for \"Go\" then send measuremetns to a DB",
   "main": "ListenBot.js",
   "scripts": {
-    "test": "echo 'no tests'"
+    "start": "node ListenBot.js",
+    "test": "echo 'no tests"
   },
   "repository": {
     "type": "git",
