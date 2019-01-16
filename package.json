@@ -4,8 +4,7 @@
   "description": "A bot that listen for \"Go\" then send measuremetns to a DB",
   "main": "ListenBot.js",
   "scripts": {
-    "start": "node ListenBot.js",
-    "test": "echo 'no tests"
+    "start": "node ListenBot.js"
   },
   "repository": {
     "type": "git",
@@ -20,5 +19,8 @@
   "dependencies": {
     "amqplib": "^0.5.3",
     "mongodb": "^3.1.10"
+  },
+  "engines": {
+    "node": "10.15"
   }
 }

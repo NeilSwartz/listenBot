@@ -1,1 +1,1 @@
-web: node ListenBot.js -p $PORT
+web: node ListenBot.js

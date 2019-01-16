@@ -14,11 +14,6 @@ var amqpConn = null;
 let urlDB = 'mongodb://admin:admin987@ds062818.mlab.com:62818/neil_s_db';
 let urlMB = "amqp://jrbbqjwq:g1uvK2MTYiBfvH_JEu9QB5ok6It3oYhJ@flamingo.rmq.cloudamqp.com/jrbbqjwq"
 
-let port = process.env.PORT||5000;
-if (port == null || port == "") {
-  port = 5000;
-}
-
 // if the connection is closed or fails to be established at all, we will reconnect
 
 function start() {
@@ -186,10 +181,5 @@ function closeOnErr(err) {
   clientDB.close(function (err) {if(err) throw err;});
   return true;
 }
-
-
-// setInterval(function () {
-//     publish("", "Read", new Buffer("read"));
-// }, 10000);
 
 start();
