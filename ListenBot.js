@@ -5,6 +5,7 @@ Project using Envirophat on pi to store measurements in a mongo DB
 
 var amqp = require('amqplib/callback_api');
 const mongodb = require('mongodb');
+const express = require('express')
 
 var pubChannel = null;
 var offlinePubQueue = [];
@@ -13,6 +14,9 @@ var db = null;
 var amqpConn = null;
 let urlDB = 'mongodb://admin:admin987@ds062818.mlab.com:62818/neil_s_db';
 let urlMB = "amqp://jrbbqjwq:g1uvK2MTYiBfvH_JEu9QB5ok6It3oYhJ@flamingo.rmq.cloudamqp.com/jrbbqjwq"
+const PORT = process.env.PORT || 5000
+
+const app = express()
 
 // if the connection is closed or fails to be established at all, we will reconnect
 
@@ -179,4 +183,7 @@ function closeOnErr(err) {
   return true;
 }
 
-start();
+start()
+
+app.get('/', (res, req) => res.send('Hi Neil'))
+app.listen(PORT, () => console.log('Listening on port: ', PORT))
