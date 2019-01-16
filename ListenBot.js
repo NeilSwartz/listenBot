@@ -41,7 +41,6 @@ function start() {
 
 function ConnectDB() {
     mongodb.MongoClient.connect(urlDB, function(err, client) {
-
         if (err) {
             console.error("[MDB]", err.message);
             return setTimeout(start, 1000);
@@ -50,14 +49,12 @@ function ConnectDB() {
         db = client.db('neil_s_db');
         console.log("[MDB] connected");
         whenConnected();
-
     });
 }
 
 function whenConnected() {
   startPublisher();
   startReader();
-//   startReaderPi();
 }
 
 
