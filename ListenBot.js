@@ -20,8 +20,12 @@ const PORT = process.env.PORT || 5000
 
 const app = express()
 
+
+
 // if the connection is closed or fails to be established at all, we will reconnect
 
+
+// CONNECTION PROCESS 
 function start() {
   amqp.connect(urlMB, function(err, conn) {
     if (err) {
@@ -62,12 +66,14 @@ function ConnectDB() {
     });
 }
 
+//CHANNEL CREATION
+
 function whenConnected() {
   startPublisher()
   startReader()
 }
 
-
+//publish channels
 function startPublisher() {
   amqpConn.createConfirmChannel(function(err, ch) {
     if (closeOnErr(err)) return
@@ -87,24 +93,7 @@ function startPublisher() {
   });
 }
 
-// method to publish a message, will queue messages internally if the connection is down and resend later
-function publish(exchange, routingKey, content) {
-  try {
-    pubChannel.publish(exchange, routingKey, content, { persistent: true },
-                       function(err, ok) {
-                         if (err) {
-                           console.error("[AMQP] publish", err)
-                           offlinePubQueue.push([exchange, routingKey, content])
-                           pubChannel.connection.close()
-                         }
-                       })
-  } catch (e) {
-    console.error("[AMQP] publish", e.message)
-    offlinePubQueue.push([exchange, routingKey, content])
-  }
-}
-
-// A worker that acks messages only if processed succesfully
+// read channels - only ack if successful
 function startReader() {
   amqpConn.createChannel(function(err, ch) {
     if (closeOnErr(err)) return
@@ -164,6 +153,8 @@ function startReader() {
   });
 }
 
+//FUNCTIONS 
+
 function read(msg, cb) {
    console.log("Message Received from App:", msg.content.toString())
    publish("", "Read", new Buffer("read"))
@@ -186,6 +177,8 @@ function closeOnErr(err) {
   clientDB.close(function (err) {if(err) throw err;})
   return true
 }
+
+//CODE START
 
 start()
 
