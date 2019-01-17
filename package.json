@@ -8,14 +8,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/NeilSwartz/listenBot.git"
+    "url": "git+https://github.com/NeilSwartz/listenBot2.git"
   },
   "author": "Neil Swartz",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/NeilSwartz/listenBot/issues"
+    "url": "https://github.com/NeilSwartz/listenBot2/issues"
   },
-  "homepage": "https://github.com/NeilSwartz/listenBot#readme",
+  "homepage": "https://github.com/NeilSwartz/listenBot2#readme",
   "dependencies": {
     "amqplib": "^0.5.3",
     "express": "^4.16.4",

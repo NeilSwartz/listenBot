@@ -155,6 +155,23 @@ function startReader() {
 
 //FUNCTIONS 
 
+// method to publish a message, will queue messages internally if the connection is down and resend later
+function publish(exchange, routingKey, content) {
+  try {
+    pubChannel.publish(exchange, routingKey, content, { persistent: true },
+                       function(err, ok) {
+                         if (err) {
+                           console.error("[AMQP] publish", err)
+                           offlinePubQueue.push([exchange, routingKey, content])
+                           pubChannel.connection.close()
+                         }
+                       })
+  } catch (e) {
+    console.error("[AMQP] publish", e.message)
+    offlinePubQueue.push([exchange, routingKey, content])
+  }
+}
+
 function read(msg, cb) {
    console.log("Message Received from App:", msg.content.toString())
    publish("", "Read", new Buffer("read"))
@@ -195,8 +212,14 @@ app.get('/data', (req ,res) => {
     
   })
 })
+ 
+
+// setInterval(() =>{
+//   publish("", "Check", new Buffer("You Good?"))
+//   console.log("Check send")
+// } ,180000)
 
 setInterval(() =>{
-  publish("", "Check", new Buffer("You Good?"))
-  console.log("Check send")
-} ,180000)
+  publish("", "Read", new Buffer("read"))
+  console.log("Read Ask")
+} ,60000)
