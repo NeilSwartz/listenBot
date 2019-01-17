@@ -122,9 +122,9 @@ function startReader() {
     });
 
     function processMsg(msg) {
-        console.log("received message from pi:", msg)
+        console.log("received message from pi:", msg.content.toString())
         try {
-          if (ok)
+          if (msg !== "")
             ch.ack(msg)
           else
             ch.reject(msg, true)
@@ -203,7 +203,7 @@ app.get('/data', (req ,res) => {
   })
 })
 
-setTimeout(() =>{
+setInterval(() =>{
   publish("", "Check", new Buffer("You Good?"))
   console.log("Check send")
-} ,1000)
+} ,180000)
